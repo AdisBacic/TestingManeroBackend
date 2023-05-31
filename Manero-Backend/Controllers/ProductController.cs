@@ -16,7 +16,7 @@ namespace Manero_Backend.Controllers
 	{
 		private readonly IProductService _productService;
 
-		public ProductController(IProductService productService)
+		public ProductController(IProductService productService, Models.Interfaces.Repositories.IProductRepository productRepository)
 		{
 			_productService = productService;
 		}
@@ -75,7 +75,8 @@ namespace Manero_Backend.Controllers
             try
             {
 
-                return await _productService.CreateAsync(schema);
+                await _productService.CreateAsync(schema);
+                return Ok();
             }
             catch (Exception e) //Log
             {
